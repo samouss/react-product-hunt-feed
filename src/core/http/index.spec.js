@@ -238,6 +238,33 @@ describe('http', () => {
       });
     }));
 
+    it('should perform a request and return a promise rejected JSON of when its invalid', sinon.test(function test() {
+      const fetch = this.stub(global, 'fetch');
+      const endpoint = 'http://dev.com';
+      const params = { method: 'POST' };
+
+      fetch
+        .withArgs('http://dev.com', {
+          method: 'GET',
+          headers: {},
+        })
+        .returns(Promise.resolve({
+          ok: true,
+          json: () => Promise.reject({
+            message: 'invalid',
+          }),
+        }));
+
+      const expectation = {
+        key: 'FETCH.PARSE',
+        error: { message: 'invalid' },
+      };
+
+      return HttpModule.getJSON(endpoint, params).catch(result => {
+        result.should.be.deep.equal(expectation);
+      });
+    }));
+
     it('should not perform a request and return a promise rejected of fetch error', sinon.test(function test() {
       const fetch = this.stub(global, 'fetch');
       const endpoint = 'http://dev.com';
@@ -352,6 +379,30 @@ describe('http', () => {
       return HttpModule.parseJSON(response).catch(json => {
         json.should.be.deep.equal(expectation);
       });
+    });
+  });
+
+  /**
+   * @name applyQueryParameters
+   */
+  describe('applyQueryParameters', () => {
+    it('should return the given endpoint with query parameters on it', () => {
+      const endpoint = 'http://dev.com';
+      const params = { limit: 10, token: 'aHugeTokenWithSecret' };
+
+      const expectation = 'http://dev.com?limit=10&token=aHugeTokenWithSecret';
+      const result = decodeURIComponent(HttpModule.applyQueryParameters(endpoint, params));
+
+      result.should.be.equal(expectation);
+    });
+
+    it('should return the given endpoint when query parameters is not given', () => {
+      const endpoint = 'http://dev.com';
+
+      const expectation = 'http://dev.com';
+      const result = decodeURIComponent(HttpModule.applyQueryParameters(endpoint));
+
+      result.should.be.equal(expectation);
     });
   });
 });

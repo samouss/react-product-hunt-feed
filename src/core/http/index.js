@@ -56,3 +56,19 @@ export function parseJSON(response) {
     return Promise.reject({ key: 'FETCH.PARSE', error });
   });
 }
+
+/**
+ * @name   applyQueryParameters
+ * @desc   Return the given endpoint with query parameters apply on it
+ * @param  {string}                          endpoint
+ * @param  {{ [key:string]: string|number }} parameters
+ * @return {string}
+ */
+export function applyQueryParameters(endpoint, parameters = {}) {
+  return Object.keys(parameters).reduce((acc, key, index) => {
+    const suffix = (index === 0) ? '?' : '&';
+    const pair = encodeURIComponent(`${suffix}${key}=${parameters[key]}`);
+
+    return acc + pair;
+  }, endpoint);
+}
