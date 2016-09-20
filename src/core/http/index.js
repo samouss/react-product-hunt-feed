@@ -9,11 +9,7 @@
  * @return {Promise<FetchResponse>}
  */
 export function http({ endpoint, method, headers = {} }) {
-  return fetch(endpoint, { method, headers }).then(res => {
-    if (!res.ok) {
-      return Promise.reject(res);
-    }
-
-    return res;
+  return fetch(endpoint, { method, headers }).catch(error => {
+    return Promise.reject({ key: 'FETCH.ABORT', error });
   });
 }

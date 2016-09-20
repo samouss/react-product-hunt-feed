@@ -9,7 +9,10 @@ chai.should();
 /**
  * @name http
  */
-describe.only('http', () => {
+describe('http', () => {
+  /**
+   * @name http
+   */
   describe('http', () => {
     it('should perform a success GET request and return a promise resolved of response', sinon.test(function test() {
       const fetch = this.stub(global, 'fetch');
@@ -64,7 +67,7 @@ describe.only('http', () => {
 
       const expectation = { ok: false };
 
-      return HttpModule.http(config).catch(result => {
+      return HttpModule.http(config).then(result => {
         result.should.deep.equal(expectation);
       });
     }));
@@ -78,9 +81,12 @@ describe.only('http', () => {
           method: 'GET',
           headers: {},
         })
-        .returns(Promise.reject({ fetch: 'error' }));
+        .returns(Promise.reject({ value: 'error' }));
 
-      const expectation = { fetch: 'error' };
+      const expectation = {
+        key: 'FETCH.ABORT',
+        error: { value: 'error' },
+      };
 
       return HttpModule.http(config).catch(result => {
         result.should.deep.equal(expectation);
