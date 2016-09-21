@@ -2,6 +2,9 @@
 /node_modules
 /dist
 
-# Files
+# Global files
 npm-debug.log
 .DS_Store
+
+# Files
+/config.json
