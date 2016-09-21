@@ -1,7 +1,7 @@
 {
-  "name": "react-twitter-feed",
+  "name": "react-product-hunt-feed",
   "version": "1.0.0",
-  "description": "Webpack React Starter with Babel, ESLint, Mocha, Chai, Sinon, Enzyme",
+  "description": "Product Hunt feed build with React",
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server --inline --hot --content-base dist --no-info --open",
@@ -14,7 +14,7 @@
   ],
   "keywords": [
     "react",
-    "twitter",
+    "product hunt",
     "feed"
   ],
   "devDependencies": {
