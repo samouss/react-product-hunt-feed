@@ -48,7 +48,7 @@ describe('api', () => {
   describe('getPosts', () => {
     it('should fetch the Product Hunt API and return a promise of posts', sinon.test(function test() {
       this.stub(HttpModule, 'getJSON')
-        .withArgs('http://product-hunt.dev/posts')
+        .withArgs('http://product-hunt.dev/posts/all')
         .returns(Promise.resolve({
           key: 'FETCH.SUCCESS',
           body: {
@@ -82,7 +82,7 @@ describe('api', () => {
       };
 
       this.stub(HttpModule, 'getJSON')
-        .withArgs(`http://product-hunt.dev/posts${encodeURIComponent('?per_page=5&older=0')}`)
+        .withArgs(`http://product-hunt.dev/posts/all?${encodeURI('per_page=5&older=0')}`)
         .returns(Promise.resolve({
           key: 'FETCH.SUCCESS',
           body: {

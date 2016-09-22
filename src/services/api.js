@@ -21,7 +21,7 @@ export function getCategories(params = {}) {
  * @return {Promise<any>}
  */
 export function getPosts({ query, headers } = {}) {
-  return getJSONWithAuthorization(applyQueryParameters(`${endpoint}/posts`, query), headers).then(res => {
+  return getJSONWithAuthorization(applyQueryParameters(`${endpoint}/posts/all`, query), headers).then(res => {
     return res.body.posts;
   });
 }
