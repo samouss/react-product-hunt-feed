@@ -6,7 +6,7 @@ chai.should();
 /**
  * @name posts
  */
-describe.only('posts', () => {
+describe('posts', () => {
   /**
    * @name normalizePost
    */
