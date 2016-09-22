@@ -54,4 +54,27 @@ describe.only('posts', () => {
       result.should.be.deep.equal(expectation);
     });
   });
+
+  /**
+   * @name normalizeTopic
+   */
+  describe('normalizeTopic', () => {
+    it('should return a topic normalized from API object', () => {
+      const post = {
+        id: 8,
+        name: 'iPhone',
+        slug: 'iphone',
+      };
+
+      const expectation = {
+        id: 8,
+        title: 'iPhone',
+        slug: 'iphone',
+      };
+
+      const result = PostsModule.normalizeTopic(post);
+
+      result.should.be.deep.equal(expectation);
+    });
+  });
 });
