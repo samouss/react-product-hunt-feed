@@ -67,7 +67,7 @@ export function parseJSON(response) {
 export function applyQueryParameters(endpoint, parameters = {}) {
   return Object.keys(parameters).reduce((acc, key, index) => {
     const suffix = (index === 0) ? '?' : '&';
-    const pair = encodeURIComponent(`${suffix}${key}=${parameters[key]}`);
+    const pair = `${suffix}${encodeURI(`${key}=${parameters[key]}`)}`;
 
     return acc + pair;
   }, endpoint);

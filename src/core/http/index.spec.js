@@ -391,7 +391,7 @@ describe('http', () => {
       const params = { limit: 10, token: 'aHugeTokenWithSecret' };
 
       const expectation = 'http://dev.com?limit=10&token=aHugeTokenWithSecret';
-      const result = decodeURIComponent(HttpModule.applyQueryParameters(endpoint, params));
+      const result = decodeURI(HttpModule.applyQueryParameters(endpoint, params));
 
       result.should.be.equal(expectation);
     });
@@ -400,7 +400,7 @@ describe('http', () => {
       const endpoint = 'http://dev.com';
 
       const expectation = 'http://dev.com';
-      const result = decodeURIComponent(HttpModule.applyQueryParameters(endpoint));
+      const result = decodeURI(HttpModule.applyQueryParameters(endpoint));
 
       result.should.be.equal(expectation);
     });
