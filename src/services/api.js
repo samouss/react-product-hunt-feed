@@ -1,14 +1,25 @@
 import { endpoint, token } from '../../config';
-import { getJSON } from '../core/http';
+import { getJSON, applyQueryParameters } from '../core/http';
 
 /**
  * @name   getCategories
  * @desc   Get the categories from Product Hunt
- * @param  {object}                   params
+ * @param  {{ [key: string]: string|number }} params
  * @return {Promise<Array<Category>>}
  */
 export function getCategories(params = {}) {
   return getJSONWithAuthorization(`${endpoint}/categories`, params.headers).then(res => res.body);
+}
+
+/**
+ * @name   getPosts
+ * @desc   Get the posts from Product Hunt with given query parameters
+ * @param  {{ [key: string]: string|number }} query
+ * @param  {{ [key: string]: string|number }} headers
+ * @return {Promise<any>}
+ */
+export function getPosts({ query, headers } = {}) {
+  return getJSONWithAuthorization(applyQueryParameters(`${endpoint}/posts`, query), headers).then(res => res.body);
 }
 
 /**

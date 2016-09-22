@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 import chai from 'chai';
 import sinon from 'sinon';
 import * as ApiModule from './api';
@@ -6,6 +8,9 @@ import * as ConfigModule from '../../config';
 
 chai.should();
 
+/**
+ * @name api
+ */
 describe('api', () => {
   /**
    * @name getCategories
@@ -37,35 +42,77 @@ describe('api', () => {
         res.should.be.deep.equal(expectation);
       });
     }));
+  });
 
-    it('should fetch the Product Hunt API with headers and return a promise of categories', sinon.test(function test() {
+  /**
+   * @name getPosts
+   */
+  describe('getPosts', () => {
+    it('should fetch the Product Hunt API and return a promise of posts', sinon.test(function test() {
       this.stub(HttpModule, 'getJSON')
-        .withArgs('http://product-hunt.dev/categories', {
-          headers: {
-            Authorization: 'Bearer TOKEN',
-          },
-        })
+        .withArgs('http://product-hunt.dev/posts')
         .returns(Promise.resolve({
           key: 'FETCH.SUCCESS',
           body: {
-            categories: [
-              { id: 1, slug: 'tech' },
-              { id: 2, slug: 'category-2' },
+            posts: [
+              { id: 1, name: 'Slack' },
+              { id: 2, name: 'Apple Music' },
+              { id: 3, name: 'Twitter' },
             ],
           },
         }));
 
       this.stub(ConfigModule.default, 'endpoint', 'http://product-hunt.dev');
-      this.stub(ConfigModule.default, 'token', 'TOKEN');
 
       const expectation = {
-        categories: [
-          { id: 1, slug: 'tech' },
-          { id: 2, slug: 'category-2' },
+        posts: [
+          { id: 1, name: 'Slack' },
+          { id: 2, name: 'Apple Music' },
+          { id: 3, name: 'Twitter' },
         ],
       };
 
-      return ApiModule.getCategories().then(res => {
+      return ApiModule.getPosts().then(res => {
+        res.should.be.deep.equal(expectation);
+      });
+    }));
+
+    it('should fetch the Product Hunt API with query parameters and return a promise of posts', sinon.test(function test() {
+      const params = {
+        query: {
+          per_page: 5,
+          older: 0,
+        },
+      };
+
+      this.stub(HttpModule, 'getJSON')
+        .withArgs(`http://product-hunt.dev/posts${encodeURIComponent('?per_page=5&older=0')}`)
+        .returns(Promise.resolve({
+          key: 'FETCH.SUCCESS',
+          body: {
+            posts: [
+              { id: 1, name: 'Slack' },
+              { id: 2, name: 'Apple Music' },
+              { id: 3, name: 'Twitter' },
+              { id: 4, name: 'Spotify' },
+              { id: 5, name: 'Uber' },
+            ],
+          },
+        }));
+
+      this.stub(ConfigModule.default, 'endpoint', 'http://product-hunt.dev');
+
+      const expectation = {
+        posts: [
+          { id: 1, name: 'Slack' },
+          { id: 2, name: 'Apple Music' },
+          { id: 3, name: 'Twitter' },
+          { id: 4, name: 'Spotify' },
+          { id: 5, name: 'Uber' },
+        ],
+      };
+
+      return ApiModule.getPosts(params).then(res => {
         res.should.be.deep.equal(expectation);
       });
     }));
