@@ -8,9 +8,7 @@ import { getJSON, applyQueryParameters } from '../core/http';
  * @return {Promise<Array<Category>>}
  */
 export function getCategories(params = {}) {
-  return getJSONWithAuthorization(`${endpoint}/categories`, params.headers).then(res => {
-    return res.body.categories;
-  });
+  return getJSONWithAuthorization(`${endpoint}/categories`, params.headers).then(res => res.body);
 }
 
 /**
@@ -21,9 +19,7 @@ export function getCategories(params = {}) {
  * @return {Promise<any>}
  */
 export function getPosts({ query, headers } = {}) {
-  return getJSONWithAuthorization(applyQueryParameters(`${endpoint}/posts/all`, query), headers).then(res => {
-    return res.body.posts;
-  });
+  return getJSONWithAuthorization(applyQueryParameters(`${endpoint}/posts/all`, query), headers).then(res => res.body);
 }
 
 /**

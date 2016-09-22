@@ -31,10 +31,12 @@ describe('api', () => {
 
       this.stub(ConfigModule.default, 'endpoint', 'http://product-hunt.dev');
 
-      const expectation = [
-        { id: 1, slug: 'tech' },
-        { id: 2, slug: 'category-2' },
-      ];
+      const expectation = {
+        categories: [
+          { id: 1, slug: 'tech' },
+          { id: 2, slug: 'category-2' },
+        ],
+      };
 
       return ApiModule.getCategories().then(res => {
         res.should.be.deep.equal(expectation);
@@ -62,11 +64,13 @@ describe('api', () => {
 
       this.stub(ConfigModule.default, 'endpoint', 'http://product-hunt.dev');
 
-      const expectation = [
-        { id: 1, name: 'Slack' },
-        { id: 2, name: 'Apple Music' },
-        { id: 3, name: 'Twitter' },
-      ];
+      const expectation = {
+        posts: [
+          { id: 1, name: 'Slack' },
+          { id: 2, name: 'Apple Music' },
+          { id: 3, name: 'Twitter' },
+        ],
+      };
 
       return ApiModule.getPosts().then(res => {
         res.should.be.deep.equal(expectation);
@@ -98,13 +102,15 @@ describe('api', () => {
 
       this.stub(ConfigModule.default, 'endpoint', 'http://product-hunt.dev');
 
-      const expectation = [
-        { id: 1, name: 'Slack' },
-        { id: 2, name: 'Apple Music' },
-        { id: 3, name: 'Twitter' },
-        { id: 4, name: 'Spotify' },
-        { id: 5, name: 'Uber' },
-      ];
+      const expectation = {
+        posts: [
+          { id: 1, name: 'Slack' },
+          { id: 2, name: 'Apple Music' },
+          { id: 3, name: 'Twitter' },
+          { id: 4, name: 'Spotify' },
+          { id: 5, name: 'Uber' },
+        ],
+      };
 
       return ApiModule.getPosts(params).then(res => {
         res.should.be.deep.equal(expectation);
