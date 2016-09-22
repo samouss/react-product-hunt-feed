@@ -8,6 +8,70 @@ chai.should();
 
 describe('api', () => {
   /**
+   * @name getCategories
+   */
+  describe('getCategories', () => {
+    it('should fetch the Product Hunt API and return a promise of categories', sinon.test(function test() {
+      this.stub(HttpModule, 'getJSON')
+        .withArgs('http://product-hunt.dev/categories')
+        .returns(Promise.resolve({
+          key: 'FETCH.SUCCESS',
+          body: {
+            categories: [
+              { id: 1, slug: 'tech' },
+              { id: 2, slug: 'category-2' },
+            ],
+          },
+        }));
+
+      this.stub(ConfigModule.default, 'endpoint', 'http://product-hunt.dev');
+
+      const expectation = {
+        categories: [
+          { id: 1, slug: 'tech' },
+          { id: 2, slug: 'category-2' },
+        ],
+      };
+
+      return ApiModule.getCategories().then(res => {
+        res.should.be.deep.equal(expectation);
+      });
+    }));
+
+    it('should fetch the Product Hunt API with headers and return a promise of categories', sinon.test(function test() {
+      this.stub(HttpModule, 'getJSON')
+        .withArgs('http://product-hunt.dev/categories', {
+          headers: {
+            Authorization: 'Bearer TOKEN',
+          },
+        })
+        .returns(Promise.resolve({
+          key: 'FETCH.SUCCESS',
+          body: {
+            categories: [
+              { id: 1, slug: 'tech' },
+              { id: 2, slug: 'category-2' },
+            ],
+          },
+        }));
+
+      this.stub(ConfigModule.default, 'endpoint', 'http://product-hunt.dev');
+      this.stub(ConfigModule.default, 'token', 'TOKEN');
+
+      const expectation = {
+        categories: [
+          { id: 1, slug: 'tech' },
+          { id: 2, slug: 'category-2' },
+        ],
+      };
+
+      return ApiModule.getCategories().then(res => {
+        res.should.be.deep.equal(expectation);
+      });
+    }));
+  });
+
+  /**
    * @name getJSONWithAuthorization
    */
   describe('getJSONWithAuthorization', () => {

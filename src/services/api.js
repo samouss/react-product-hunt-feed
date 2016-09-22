@@ -1,5 +1,15 @@
-import { token } from '../../config.json';
+import { endpoint, token } from '../../config';
 import { getJSON } from '../core/http';
+
+/**
+ * @name   getCategories
+ * @desc   Get the categories from Product Hunt
+ * @param  {object}                   params
+ * @return {Promise<Array<Category>>}
+ */
+export function getCategories(params = {}) {
+  return getJSONWithAuthorization(`${endpoint}/categories`, params.headers).then(res => res.body);
+}
 
 /**
  * @name   getJSONWithAuthorization
