@@ -13,9 +13,9 @@ chai.should();
  */
 describe('api', () => {
   /**
-   * @name getCategories
+   * @name fetchCategories
    */
-  describe('getCategories', () => {
+  describe('fetchCategories', () => {
     it('should fetch the Product Hunt API and return a promise of categories', sinon.test(function test() {
       this.stub(HttpModule, 'getJSON')
         .withArgs('http://product-hunt.dev/categories')
@@ -38,16 +38,16 @@ describe('api', () => {
         ],
       };
 
-      return ApiModule.getCategories().then(res => {
+      return ApiModule.fetchCategories().then(res => {
         res.should.be.deep.equal(expectation);
       });
     }));
   });
 
   /**
-   * @name getPosts
+   * @name fetchPosts
    */
-  describe('getPosts', () => {
+  describe('fetchPosts', () => {
     it('should fetch the Product Hunt API and return a promise of posts', sinon.test(function test() {
       this.stub(HttpModule, 'getJSON')
         .withArgs('http://product-hunt.dev/posts/all')
@@ -72,7 +72,7 @@ describe('api', () => {
         ],
       };
 
-      return ApiModule.getPosts().then(res => {
+      return ApiModule.fetchPosts().then(res => {
         res.should.be.deep.equal(expectation);
       });
     }));
@@ -112,7 +112,7 @@ describe('api', () => {
         ],
       };
 
-      return ApiModule.getPosts(params).then(res => {
+      return ApiModule.fetchPosts(params).then(res => {
         res.should.be.deep.equal(expectation);
       });
     }));
