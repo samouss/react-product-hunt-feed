@@ -112,7 +112,7 @@ describe('normalize', () => {
         thumbnail: {
           id: 255139,
           media_type: 'image',
-          image_url: 'http://producthunt/thumbnail',
+          image_url: 'http://producthunt/thumbnail?h=10&w=10',
           metadata: {},
         },
       };

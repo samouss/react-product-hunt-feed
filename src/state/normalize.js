@@ -1,3 +1,5 @@
+import { trimQueryParameters } from '../core/http';
+
 export function byId(state, items) {
   return items.reduce((acc, item) => {
     return { ...acc, [item.id]: item };
@@ -18,7 +20,7 @@ export function post(post) {
     link: post.discussion_url,
     votes: post.votes_count,
     topics: post.topics.map(topic),
-    thumbnail: post.thumbnail.image_url,
+    thumbnail: trimQueryParameters(post.thumbnail.image_url),
   };
 }
 
