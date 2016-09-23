@@ -72,3 +72,19 @@ export function applyQueryParameters(endpoint, parameters = {}) {
     return acc + pair;
   }, endpoint);
 }
+
+/**
+ * @name   trimQueryParameters
+ * @desc   Return the given endpoint without any query parameters
+ * @param  {string} endpoint
+ * @return {string}
+ */
+export function trimQueryParameters(endpoint) {
+  const index = endpoint.indexOf('?');
+
+  if (index === -1) {
+    return endpoint;
+  }
+
+  return endpoint.substring(0, index);
+}

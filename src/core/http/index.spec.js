@@ -405,4 +405,27 @@ describe('http', () => {
       result.should.be.equal(expectation);
     });
   });
+
+  /**
+   * @name trimQueryParameters
+   */
+  describe('trimQueryParameters', () => {
+    it('should return the given endpoint with query parameters removed', () => {
+      const endpoint = 'http://dev.com?limit=10&token=aHugeTokenWithSecret';
+
+      const expectation = 'http://dev.com';
+      const result = HttpModule.trimQueryParameters(endpoint);
+
+      result.should.be.equal(expectation);
+    });
+
+    it('should return the given endpoint when no query parameters is found', () => {
+      const endpoint = 'http://dev.com';
+
+      const expectation = 'http://dev.com';
+      const result = HttpModule.trimQueryParameters(endpoint);
+
+      result.should.be.equal(expectation);
+    });
+  });
 });
