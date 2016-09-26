@@ -7,8 +7,8 @@ import { getJSON, applyQueryParameters } from '../core/http';
  * @param  {{ [key: string]: string|number }} params
  * @return {Promise<Array<Category>>}
  */
-export function fetchCategories(params = {}) {
-  return getJSONWithAuthorization(`${endpoint}/categories`, params.headers).then(res => res.body);
+export function fetchCategories({ headers } = {}) {
+  return getJSONWithAuthorization(`${endpoint}/categories`, headers).then(res => res.body);
 }
 
 /**
