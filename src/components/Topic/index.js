@@ -3,7 +3,11 @@ import './index.css';
 
 export default function Topic({ topic }) {
   return (
-    <div className="topic">{topic.title}</div>
+    <div
+      className="topic"
+    >
+      {topic.title}
+    </div>
   );
 }
 
