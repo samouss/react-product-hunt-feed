@@ -1,20 +1,10 @@
-# React Webpack starter
+# React Product Hunt Feed
 
-[![dependencies Status](https://david-dm.org/samouss/react-webpack-starter/status.svg)](https://david-dm.org/samouss/react-webpack-starter) [![devDependencies Status](https://david-dm.org/samouss/react-webpack-starter/dev-status.svg)](https://david-dm.org/samouss/react-webpack-starter?type=dev)
+[![dependencies Status](https://david-dm.org/samouss/react-product-hunt-feed/status.svg)](https://david-dm.org/samouss/react-product-hunt-feed) [![devDependencies Status](https://david-dm.org/samouss/react-product-hunt-feed/dev-status.svg)](https://david-dm.org/samouss/react-product-hunt-feed?type=dev)
 
-React starter build with Webpack, Babel, ESLint, Mocha, Chai, Sinon, Enzyme.
+Product Hunt feed build with React, Webpack, Babel, ESLint, Mocha, Chai, Sinon, Enzyme.
 
-## Clone
-
-Run this command for launch a new project from the starter.
-
-```
-// Run this command first for clone the repository
-git clone git@github.com:samouss/react-webpack-starter.git [PROJECT_NAME]
-
-// Then execute this one for remove .git information and start a new project
-rm -rf [PROJECT_NAME]/.git
-```
+![Product Hunt Feed](https://octodex.github.com/images/yaktocat.png)
 
 ## Installation
 
@@ -23,6 +13,8 @@ Clone the repository and then run the following command:
 ```
 npm install
 ```
+
+Create the `config.json` file from `config.json.dist` then create a [Product Hunt API token](https://api.producthunt.com/v1/docs).
 
 ## Run the application
 
