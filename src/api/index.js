@@ -1,4 +1,4 @@
-import { endpoint, token } from '../../config';
+import { endpoint, token } from '../../config.json';
 import { getJSON, applyQueryParameters } from '../core/http';
 
 /**
