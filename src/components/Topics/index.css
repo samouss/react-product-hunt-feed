@@ -1,0 +1,23 @@
+/**
+ * CSS for <Topics />
+ */
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.topics > * {
+  margin-right: 10px;
+}
+
+.topics > *:last-child {
+  margin-right: 0;
+}
+
+.topics__more {
+  color: #999999;
+  font-weight: 400;
+}
