@@ -131,6 +131,7 @@ describe('normalize', () => {
           { id: 45, title: 'Emoji', slug: 'emoji' },
         ],
         thumbnail: 'http://producthunt/thumbnail',
+        isVoted: false,
       };
 
       const result = NormalizeModule.post(post);

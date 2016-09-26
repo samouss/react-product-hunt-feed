@@ -21,6 +21,7 @@ export function post(post) {
     votes: post.votes_count,
     topics: post.topics.map(topic),
     thumbnail: trimQueryParameters(post.thumbnail.image_url),
+    isVoted: false,
   };
 }
 
