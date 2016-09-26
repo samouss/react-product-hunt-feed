@@ -22,6 +22,29 @@ describe('<Button />', () => {
 
     const wrapper = shallow(
       <Button
+        selected={false}
+        onClick={() => {}}
+      >
+        With content
+      </Button>
+    );
+
+    wrapper.containsMatchingElement(expectation).should.be.equal(true);
+  });
+
+  it('should render correctly with selected props', () => {
+    const expectation = (
+      <a
+        href=""
+        className="button button--selected"
+      >
+        With content
+      </a>
+    );
+
+    const wrapper = shallow(
+      <Button
+        selected
         onClick={() => {}}
       >
         With content
@@ -37,6 +60,7 @@ describe('<Button />', () => {
 
     const wrapper = shallow(
       <Button
+        selected={false}
         onClick={onClick}
       >
         With content

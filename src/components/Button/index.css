@@ -16,7 +16,8 @@
   transition: background-color .15s, color .15s;
 }
 
-.button:hover {
+.button:hover,
+.button--selected {
   background-color: #da552f;
   color: #ffffff;
 }
