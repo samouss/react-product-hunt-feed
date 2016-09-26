@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import last from 'lodash.last';
 import InfiniteList from 'react-infinite-scroll-list';
 import { fetchCategories, fetchPosts } from './api';
@@ -36,11 +36,15 @@ export default class Container extends Component {
    * @name componentDidMount
    */
   componentDidMount() {
+    const { endpoint, token } = this.props;
     const { categoryById, postById, categoryIds, postIds } = this.state;
 
+    const headers = { Authorization: `Bearer ${token}` };
+    const query = { per_page: this.perPage };
+
     return Promise.all([
-      fetchCategories(),
-      fetchPosts({ query: { per_page: this.perPage } }),
+      fetchCategories({ endpoint, headers }),
+      fetchPosts({ endpoint, headers, query }),
     ]).then(([resCategories, resPosts]) => {
       const categories = resCategories.categories.map(category);
       const posts = resPosts.posts.map(post);
@@ -61,14 +65,13 @@ export default class Container extends Component {
   onThresholdReach() {
     this.setState({ isLoading: true });
 
+    const { endpoint, token } = this.props;
     const { postIds, postById } = this.state;
 
-    const query = {
-      per_page: this.perPage,
-      older: last(postIds),
-    };
+    const headers = { Authorization: `Bearer ${token}` };
+    const query = { per_page: this.perPage, older: last(postIds) };
 
-    return fetchPosts({ query }).then(res => {
+    return fetchPosts({ endpoint, headers, query }).then(res => {
       const posts = res.posts.map(post);
 
       this.setState({
@@ -138,3 +141,8 @@ https://api.producthunt.com/v1/docs
   }
 
 }
+
+Container.propTypes = {
+  endpoint: PropTypes.string.isRequired,
+  token: PropTypes.string.isRequired,
+};
