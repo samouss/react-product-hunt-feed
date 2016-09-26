@@ -1,0 +1,62 @@
+/*
+ * CSS for <Post />
+ */
+
+.post {
+  position: relative;
+  display: flex;
+  align-self: center;
+  padding: 25px;
+  border-bottom: 1px solid #f2f2f2;
+}
+.post:last-child {
+  border-bottom: none;
+}
+.post:hover {
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+
+/* Link */
+.post__link {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+/* Thumbnail */
+.post__thumbnail {
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  position: relative;
+}
+.post__thumbnail__source {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Content */
+.post__content {
+  margin-left: 20px;
+  flex-grow: 1;
+}
+.post__content__title {
+  font-size: 1.3rem;
+  margin: 5px 0 2px;
+}
+.post__content__description {
+  font-size: 1rem;
+  color: #999999;
+  margin: 0;
+}
+.post__content__meta {
+  margin: 12px 0 0;
+  display: flex;
+  justify-content: space-between;
+}
