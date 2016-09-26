@@ -13,6 +13,7 @@
   border: 1px solid #f2f2f2;
   border-radius: 3px;
   text-decoration: none;
+  overflow: hidden;
   transition: background-color .15s, color .15s;
 }
 
@@ -24,4 +25,29 @@
 
 .button span {
   margin-right: 8px;
+}
+
+.button--selected span {
+  animation: go-fly 0.8s ease;
+}
+
+@-webkit-keyframes go-fly {
+  0%, 100% { -webkit-transform: translateY(0) }
+  49.9% { -webkit-transform: translateY(-130%) }
+  50% { -webkit-transform: translateY(130%) }
+}
+
+@keyframes go-fly {
+  0%, 100% {
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+  }
+  49.9% {
+    transform: translateY(-130%);
+    -webkit-transform: translateY(-130%);
+  }
+  50% {
+    transform: translateY(130%);
+    -webkit-transform: translateY(130%);
+  }
 }
