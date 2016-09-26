@@ -1,6 +1,6 @@
 # React Product Hunt Feed
 
-[![dependencies Status](https://david-dm.org/samouss/react-product-hunt-feed/status.svg)](https://david-dm.org/samouss/react-product-hunt-feed) [![devDependencies Status](https://david-dm.org/samouss/react-product-hunt-feed/dev-status.svg)](https://david-dm.org/samouss/react-product-hunt-feed?type=dev)
+[![Build Status](https://travis-ci.org/samouss/react-product-hunt-feed.svg?branch=master)](https://travis-ci.org/samouss/react-product-hunt-feed) [![dependencies Status](https://david-dm.org/samouss/react-product-hunt-feed/status.svg)](https://david-dm.org/samouss/react-product-hunt-feed) [![devDependencies Status](https://david-dm.org/samouss/react-product-hunt-feed/dev-status.svg)](https://david-dm.org/samouss/react-product-hunt-feed?type=dev)
 
 Product Hunt feed build with React, Webpack, Babel, ESLint, Mocha, Chai, Sinon, Enzyme.
 
