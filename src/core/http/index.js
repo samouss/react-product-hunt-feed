@@ -3,24 +3,53 @@
  * @desc   Perfom a request through the fetch API.
  * @param  {string}                    endpoint
  * @param  {string}                    method
+ * @param  {string}                    body
  * @param  {{ [key: string]: string }} headers
  * @return {Promise<any>}
  */
-export function http({ endpoint, method, headers = {} }) {
-  return fetch(endpoint, { method, headers }).catch(error => {
+export function http(endpoint, { method, body, headers = {} }) {
+  const params = { method, headers };
+
+  if (body) {
+    params.body = body;
+  }
+
+  return fetch(endpoint, params).catch(error => {
     return Promise.reject({ key: 'FETCH.ABORT', error });
   });
 }
 
 /**
  * @name   getJSON
- * @desc   Perform a JSON request through the fetch API.
+ * @desc   Perform a GET request with JSON through the fetch API.
  * @param  {string}       endpoint
  * @param  {object}       params
  * @return {Promise<any>}
  */
 export function getJSON(endpoint, params) {
-  return http({ ...params, method: 'GET', endpoint }).then(res => {
+  return http(endpoint, { ...params, method: 'GET' }).then(res => {
+    return responseJSON(res);
+  });
+}
+
+/**
+ * @name   postJSON
+ * @desc   Perform a POST request with JSON through the fetch API.
+ * @param  {string}       endpoint
+ * @param  {object}       params
+ * @return {Promise<any>}
+ */
+export function postJSON(endpoint, { body, headers, ...rest } = {}) {
+  return http(endpoint, {
+    ...rest,
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers: {
+      ...headers,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  }).then(res => {
     return responseJSON(res);
   });
 }

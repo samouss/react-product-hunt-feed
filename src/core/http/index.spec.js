@@ -16,7 +16,8 @@ describe('http', () => {
   describe('http', () => {
     it('should perform a success GET request and return a promise resolved of response', sinon.test(function test() {
       const fetch = this.stub(global, 'fetch');
-      const config = { endpoint: 'http://dev.com', method: 'GET' };
+      const endpoint = 'http://dev.com';
+      const params = { method: 'GET' };
 
       fetch
         .withArgs('http://dev.com', {
@@ -27,15 +28,15 @@ describe('http', () => {
 
       const expectation = { ok: true };
 
-      return HttpModule.http(config).then(result => {
+      return HttpModule.http(endpoint, params).then(result => {
         result.should.be.deep.equal(expectation);
       });
     }));
 
     it('should perform a success GET request with custom headers return a promise resolved of response', sinon.test(function test() {
       const fetch = this.stub(global, 'fetch');
-      const config = {
-        endpoint: 'http://dev.com',
+      const endpoint = 'http://dev.com';
+      const params = {
         method: 'GET',
         headers: { Authorization: 'Bearer TOKEN' },
       };
@@ -49,14 +50,15 @@ describe('http', () => {
 
       const expectation = { ok: true };
 
-      return HttpModule.http(config).then(result => {
+      return HttpModule.http(endpoint, params).then(result => {
         result.should.be.deep.equal(expectation);
       });
     }));
 
     it('should perform a failed GET request and return a promise rejected of response', sinon.test(function test() {
       const fetch = this.stub(global, 'fetch');
-      const config = { endpoint: 'http://dev.com', method: 'GET' };
+      const endpoint = 'http://dev.com';
+      const params = { method: 'GET' };
 
       fetch
         .withArgs('http://dev.com', {
@@ -67,14 +69,15 @@ describe('http', () => {
 
       const expectation = { ok: false };
 
-      return HttpModule.http(config).then(result => {
+      return HttpModule.http(endpoint, params).then(result => {
         result.should.be.deep.equal(expectation);
       });
     }));
 
     it('should not perform a request and return a promise rejected of fetch error', sinon.test(function test() {
       const fetch = this.stub(global, 'fetch');
-      const config = { endpoint: 'http://dev.com', method: 'GET' };
+      const endpoint = 'http://dev.com';
+      const params = { method: 'GET' };
 
       fetch
         .withArgs('http://dev.com', {
@@ -88,7 +91,7 @@ describe('http', () => {
         error: { value: 'error' },
       };
 
-      return HttpModule.http(config).catch(result => {
+      return HttpModule.http(endpoint, params).catch(result => {
         result.should.be.deep.equal(expectation);
       });
     }));
@@ -285,6 +288,226 @@ describe('http', () => {
       };
 
       return HttpModule.getJSON(endpoint, params).catch(result => {
+        result.should.be.deep.equal(expectation);
+      });
+    }));
+  });
+
+  /**
+   * @name postJSON
+   */
+  describe('postJSON', () => {
+    it('should perform a success POST request without body and return a promise of json', sinon.test(function test() {
+      const fetch = this.stub(global, 'fetch');
+      const endpoint = 'http://dev.com';
+
+      fetch
+        .withArgs('http://dev.com', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        })
+        .returns(Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({
+            message: 'success',
+          }),
+        }));
+
+      const expectation = {
+        key: 'FETCH.SUCCESS',
+        body: { message: 'success' },
+        response: { ok: true },
+      };
+
+      return HttpModule.postJSON(endpoint).then(res => {
+        // @HACK: avoid to do this when chai support deep equal with function
+        /* eslint-disable no-param-reassign */
+        delete res.response.json;
+        /* eslint-enable no-param-reassign */
+
+        res.key.should.be.equal(expectation.key);
+        res.body.should.be.deep.equal(expectation.body);
+        res.response.should.be.deep.equal(expectation.response);
+      });
+    }));
+
+    it('should perform a success POST request with body and return a promise of json', sinon.test(function test() {
+      const fetch = this.stub(global, 'fetch');
+      const endpoint = 'http://dev.com';
+      const params = {
+        body: { content: 'value' },
+        headers: {
+          Authorization: 'Bearer TOKEN',
+          Accept: 'will be override',
+        },
+      };
+
+      fetch
+        .withArgs('http://dev.com', {
+          method: 'POST',
+          body: '{"content":"value"}',
+          headers: {
+            Authorization: 'Bearer TOKEN',
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        })
+        .returns(Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({
+            message: 'success',
+          }),
+        }));
+
+      const expectation = {
+        key: 'FETCH.SUCCESS',
+        body: { message: 'success' },
+        response: { ok: true },
+      };
+
+      return HttpModule.postJSON(endpoint, params).then(res => {
+        // @HACK: avoid to do this when chai support deep equal with function
+        /* eslint-disable no-param-reassign */
+        delete res.response.json;
+        /* eslint-enable no-param-reassign */
+
+        res.key.should.be.equal(expectation.key);
+        res.body.should.be.deep.equal(expectation.body);
+        res.response.should.be.deep.equal(expectation.response);
+      });
+    }));
+
+    it('should perform a failed POST request and return a promise of json', sinon.test(function test() {
+      const fetch = this.stub(global, 'fetch');
+      const endpoint = 'http://dev.com';
+
+      fetch
+        .withArgs('http://dev.com', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        })
+        .returns(Promise.resolve({
+          ok: false,
+          json: () => Promise.resolve({
+            message: 'failed',
+          }),
+        }));
+
+      const expectation = {
+        key: 'FETCH.FAILED',
+        body: { message: 'failed' },
+        response: { ok: false },
+      };
+
+      return HttpModule.postJSON(endpoint).catch(res => {
+        // @HACK: avoid to do this when chai support deep equal with function
+        /* eslint-disable no-param-reassign */
+        delete res.response.json;
+        /* eslint-enable no-param-reassign */
+
+        res.key.should.be.equal(expectation.key);
+        res.body.should.be.deep.equal(expectation.body);
+        res.response.should.be.deep.equal(expectation.response);
+      });
+    }));
+
+    it('should always perform a POST request even if method is pass through param configuration', sinon.test(function test() {
+      const fetch = this.stub(global, 'fetch');
+      const endpoint = 'http://dev.com';
+      const params = { method: 'GET' };
+
+      fetch
+        .withArgs('http://dev.com', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        })
+        .returns(Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({
+            message: 'success',
+          }),
+        }));
+
+      const expectation = {
+        key: 'FETCH.SUCCESS',
+        body: { message: 'success' },
+        response: { ok: true },
+      };
+
+      return HttpModule.postJSON(endpoint, params).catch(res => {
+        // @HACK: avoid to do this when chai support deep equal with function
+        /* eslint-disable no-param-reassign */
+        delete res.response.json;
+        /* eslint-enable no-param-reassign */
+
+        res.key.should.be.equal(expectation.key);
+        res.body.should.be.deep.equal(expectation.body);
+        res.response.should.be.deep.equal(expectation.response);
+      });
+    }));
+
+    it('should perform a request and return a promise rejected JSON of when its invalid', sinon.test(function test() {
+      const fetch = this.stub(global, 'fetch');
+      const endpoint = 'http://dev.com';
+      const params = {};
+
+      fetch
+        .withArgs('http://dev.com', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        })
+        .returns(Promise.resolve({
+          ok: true,
+          json: () => Promise.reject({
+            message: 'invalid',
+          }),
+        }));
+
+      const expectation = {
+        key: 'FETCH.PARSE',
+        error: { message: 'invalid' },
+      };
+
+      return HttpModule.postJSON(endpoint, params).catch(result => {
+        result.should.be.deep.equal(expectation);
+      });
+    }));
+
+    it('should not perform a request and return a promise rejected of fetch error', sinon.test(function test() {
+      const fetch = this.stub(global, 'fetch');
+      const endpoint = 'http://dev.com';
+      const params = {};
+
+      fetch
+        .withArgs('http://dev.com', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        })
+        .returns(Promise.reject({
+          value: 'error',
+        }));
+
+      const expectation = {
+        key: 'FETCH.ABORT',
+        error: { value: 'error' },
+      };
+
+      return HttpModule.postJSON(endpoint, params).catch(result => {
         result.should.be.deep.equal(expectation);
       });
     }));
