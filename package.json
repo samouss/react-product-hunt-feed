@@ -47,8 +47,10 @@
     "webpack-dev-server": "1.16.1"
   },
   "dependencies": {
+    "lodash.last": "3.0.0",
     "react": "15.3.2",
-    "react-dom": "15.3.2"
+    "react-dom": "15.3.2",
+    "react-infinite-scroll-list": "1.0.2"
   },
   "license": "MIT"
 }
