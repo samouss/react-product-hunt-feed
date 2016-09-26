@@ -3,7 +3,8 @@
  */
 
 .button {
-  display: inline-block;
+  display: flex;
+  align-self: center;
   padding: 3px 8px;
   font-size: .8rem;
   font-weight: 600;
