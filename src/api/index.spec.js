@@ -4,7 +4,7 @@ import chai from 'chai';
 import sinon from 'sinon';
 import * as ApiModule from './index';
 import * as HttpModule from '../core/http';
-import * as ConfigModule from '../../config';
+import * as ConfigModule from '../../config.json';
 
 chai.should();
 
