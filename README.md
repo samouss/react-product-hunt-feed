@@ -4,7 +4,7 @@
 
 Product Hunt feed build with React, Webpack, Babel, ESLint, Mocha, Chai, Sinon, Enzyme.
 
-![Product Hunt Feed](https://octodex.github.com/images/yaktocat.png)
+![Product Hunt Feed](https://raw.githubusercontent.com/samouss/react-product-hunt-feed/master/example.png)
 
 ## Installation
 
