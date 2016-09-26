@@ -1,4 +1,3 @@
-import { endpoint, token } from '../../config.json';
 import { getJSON, applyQueryParameters } from '../core/http';
 
 /**
@@ -7,8 +6,8 @@ import { getJSON, applyQueryParameters } from '../core/http';
  * @param  {{ [key: string]: string|number }} params
  * @return {Promise<Array<Category>>}
  */
-export function fetchCategories({ headers } = {}) {
-  return getJSONWithAuthorization(`${endpoint}/categories`, headers).then(res => res.body);
+export function fetchCategories({ endpoint, headers } = {}) {
+  return getJSON(`${endpoint}/categories`, { headers }).then(res => res.body);
 }
 
 /**
@@ -18,22 +17,6 @@ export function fetchCategories({ headers } = {}) {
  * @param  {{ [key: string]: string|number }} headers
  * @return {Promise<any>}
  */
-export function fetchPosts({ query, headers } = {}) {
-  return getJSONWithAuthorization(applyQueryParameters(`${endpoint}/posts/all`, query), headers).then(res => res.body);
-}
-
-/**
- * @name   getJSONWithAuthorization
- * @desc   Perform a JSON request through Http module with headers Authorization injected
- * @param  {string}                    endpoint
- * @param  {{ [key: string]: string }} headers
- * @return {Promise<any>}
- */
-export function getJSONWithAuthorization(endpoint, headers = {}) {
-  return getJSON(endpoint, {
-    headers: {
-      ...headers,
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export function fetchPosts({ endpoint, query, headers } = {}) {
+  return getJSON(applyQueryParameters(`${endpoint}/posts/all`, query), { headers }).then(res => res.body);
 }
