@@ -1,5 +1,6 @@
 import chai from 'chai';
 import React from 'react';
+import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import Thumbnail from '../Thumbnail';
 import Button from '../Button';
@@ -12,7 +13,9 @@ chai.should();
  * @name Post
  */
 describe('<Post />', () => {
-  it('should render correctly with given props', () => {
+  it('should render correctly with given props', sinon.test(function test() {
+    this.stub(console, 'error');
+
     const onClickVote = () => {};
     const post = {
       title: 'Title of post',
@@ -58,8 +61,6 @@ describe('<Post />', () => {
       />
     );
 
-    console.log(wrapper.debug());
-
     wrapper.containsMatchingElement(expectation).should.be.equal(true);
-  });
+  }));
 });
