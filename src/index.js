@@ -6,5 +6,5 @@ import './index.css';
 
 ReactDOM.render(
   <Container {...config} />,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
