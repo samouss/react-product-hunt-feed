@@ -4,10 +4,13 @@
   "description": "Product Hunt feed build with React",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server --inline --hot --content-base dist --no-info --open",
-    "build": "rm -rf dist && NODE_ENV=production webpack --progress",
+    "//": "-- Build scripts",
+    "clean": "rm -rf dist",
+    "start": "npm run clean && node_modules/.bin/webpack-dev-server --inline --hot --no-info --open",
+    "build": "npm run clean && node_modules/.bin/webpack --env.production --progress",
+    "//": "-- Test scripts",
     "test": "npm run mocha -- \"src/**/*.spec.js\"",
-    "mocha": "mocha --require babel-register --require test-setup.js",
+    "mocha": "node_modules/.bin/mocha --require babel-register --require test-setup.js",
     "mocha:watch": "npm run mocha -- --watch"
   },
   "repository": {
@@ -38,7 +41,7 @@
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-plugin-react": "6.9.0",
-    "extract-text-webpack-plugin": "1.0.1",
+    "extract-text-webpack-plugin": "2.0.0-rc.3",
     "html-loader": "0.4.4",
     "html-webpack-plugin": "2.28.0",
     "jsdom": "9.10.0",
@@ -48,8 +51,8 @@
     "react-addons-test-utils": "15.4.2",
     "sinon": "1.17.7",
     "style-loader": "0.13.1",
-    "webpack": "1.13.3",
-    "webpack-dev-server": "1.16.2"
+    "webpack": "2.2.1",
+    "webpack-dev-server": "2.3.0"
   },
   "dependencies": {
     "lodash.last": "3.0.0",
