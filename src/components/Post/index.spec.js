@@ -31,6 +31,7 @@ describe('<Post />', () => {
         <div className="post__thumbnail">
           <Thumbnail
             source="http://static.dev/thumbnail"
+            title="Title of post"
             width={80}
             height={80}
           />
@@ -58,7 +59,7 @@ describe('<Post />', () => {
       <Post
         post={post}
         onClickVote={onClickVote}
-      />
+      />,
     );
 
     wrapper.containsMatchingElement(expectation).should.be.equal(true);

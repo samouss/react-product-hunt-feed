@@ -11,6 +11,7 @@ export default function Post({ post, onClickVote }) {
       <div className="post__thumbnail">
         <Thumbnail
           source={post.thumbnail}
+          title={post.title}
           width={80}
           height={80}
         />
