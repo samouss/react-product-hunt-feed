@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server --inline --hot --content-base dist --no-info --open",
-    "build": "rm -rf ./dist && NODE_ENV=production webpack --progress",
-    "test": "npm run mocha -- \"./src/**/*.spec.js\"",
+    "build": "rm -rf dist && NODE_ENV=production webpack --progress",
+    "test": "npm run mocha -- \"src/**/*.spec.js\"",
     "mocha": "mocha --require babel-register --require test-setup.js",
     "mocha:watch": "npm run mocha -- --watch"
   },
