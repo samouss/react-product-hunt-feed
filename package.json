@@ -4,10 +4,15 @@
   "description": "Product Hunt feed build with React",
   "main": "src/index.js",
   "scripts": {
-    "//": "-- Build scripts",
     "clean": "rm -rf dist",
-    "start": "npm run clean && node_modules/.bin/webpack-dev-server --inline --hot --no-info --open",
-    "build": "npm run clean && node_modules/.bin/webpack --env.production --progress",
+    "//": "-- Start scripts",
+    "start": "npm run build && node dist/server",
+    "start:client": "node_modules/.bin/webpack-dev-server --inline --hot --no-info --open",
+    "start:server": "npm run build:server && node dist/server",
+    "//": "-- Build scripts",
+    "build": "npm run clean && npm run build:client && npm run build:server",
+    "build:client": "node_modules/.bin/webpack --env.production --progress",
+    "build:server": "node_modules/.bin/babel server --out-dir dist/server",
     "//": "-- Test scripts",
     "test": "npm run mocha -- \"src/**/*.spec.js\"",
     "test:watch": "npm run mocha -- --watch",
@@ -26,6 +31,7 @@
     "feed"
   ],
   "devDependencies": {
+    "babel-cli": "6.22.2",
     "babel-core": "6.22.1",
     "babel-loader": "6.2.10",
     "babel-plugin-transform-object-rest-spread": "6.22.0",
@@ -55,10 +61,13 @@
     "webpack-dev-server": "2.3.0"
   },
   "dependencies": {
+    "express": "4.14.1",
     "lodash.last": "3.0.0",
     "react": "15.4.2",
     "react-dom": "15.4.2",
-    "react-infinite-scroll-list": "1.1.0"
+    "react-infinite-scroll-list": "1.1.0",
+    "request": "2.79.0",
+    "request-promise": "4.1.1"
   },
   "license": "MIT"
 }

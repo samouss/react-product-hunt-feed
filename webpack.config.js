@@ -12,12 +12,20 @@ module.exports = (options = {}) => {
     devtool: isProduction ? 'source-map' : 'eval',
     entry: `${__dirname}/src/index.js`,
     output: {
-      path: `${__dirname}/dist`,
+      path: `${__dirname}/dist/client`,
       publicPath: '/',
       filename: '[name].[hash:8].js',
     },
     performance: !isProduction ? false : {
       hints: 'warning',
+    },
+    devServer: {
+      proxy: {
+        '/': {
+          target: 'http://localhost:3000',
+          secure: false,
+        },
+      },
     },
     module: {
       loaders: [
