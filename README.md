@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/samouss/react-product-hunt-feed.svg?branch=master)](https://travis-ci.org/samouss/react-product-hunt-feed) [![dependencies Status](https://david-dm.org/samouss/react-product-hunt-feed/status.svg)](https://david-dm.org/samouss/react-product-hunt-feed) [![devDependencies Status](https://david-dm.org/samouss/react-product-hunt-feed/dev-status.svg)](https://david-dm.org/samouss/react-product-hunt-feed?type=dev)
 
-Product Hunt feed build with React, Webpack, Babel, ESLint, Mocha, Chai, Sinon, Enzyme.
+Product Hunt feed build with React, Webpack 2, Babel, ESLint, Mocha, Chai, Sinon, Enzyme.
 
-![Product Hunt Feed](https://raw.githubusercontent.com/samouss/react-product-hunt-feed/master/example.png)
+[Live exemple: product-hunt-feed.herokuapp.com](https://product-hunt-feed.herokuapp.com)
 
 ## Installation
 
@@ -14,17 +14,27 @@ Clone the repository and then run the following command:
 npm install
 ```
 
-Create the `config.json` file from `config.json.dist` then create a [Product Hunt API token](https://api.producthunt.com/v1/docs).
+Create a token on [Product Hunt API token](https://api.producthunt.com/v1/docs).
 
 ## Run the application
 
-For build the dev application and launch a server in watch mode on `localhost:8080`:
+For run the development application and launch a server in watch mode on `localhost:8080`:
 
 ```
-npm start
+PRODUCT_HUNT_TOKEN=yourSecretToken npm start:server
+
+# and in other tab
+
+npm start:client
 ```
 
-## Bundle the application
+For run the production application on `localhost:3000`:
+
+```
+PRODUCT_HUNT_TOKEN=yourSecretToken npm start
+```
+
+## Build the application
 
 For build your application for production:
 
