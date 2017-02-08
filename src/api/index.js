@@ -6,8 +6,8 @@ import { getJSON, applyQueryParameters } from '../core/http';
  * @param  {{ [key: string]: string|number }} params
  * @return {Promise<Array<Category>>}
  */
-export function fetchCategories({ endpoint, headers } = {}) {
-  return getJSON(`${endpoint}/categories`, { headers }).then(res => res.body);
+export function fetchCategories({ headers } = {}) {
+  return getJSON('/categories', { headers }).then(res => res.body);
 }
 
 /**
@@ -17,6 +17,6 @@ export function fetchCategories({ endpoint, headers } = {}) {
  * @param  {{ [key: string]: string|number }} headers
  * @return {Promise<any>}
  */
-export function fetchPosts({ endpoint, query, headers } = {}) {
-  return getJSON(applyQueryParameters(`${endpoint}/posts/all`, query), { headers }).then(res => res.body);
+export function fetchPosts({ query, headers } = {}) {
+  return getJSON(applyQueryParameters('/posts', query), { headers }).then(res => res.body);
 }

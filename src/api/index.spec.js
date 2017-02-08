@@ -16,10 +16,8 @@ describe('api', () => {
    */
   describe('fetchCategories', () => {
     it('should fetch the Product Hunt API and return a promise of categories', sinon.test(function test() {
-      const endpoint = 'http://product-hunt.dev';
-
       this.stub(HttpModule, 'getJSON')
-        .withArgs('http://product-hunt.dev/categories')
+        .withArgs('/categories')
         .returns(Promise.resolve({
           key: 'FETCH.SUCCESS',
           body: {
@@ -37,7 +35,7 @@ describe('api', () => {
         ],
       };
 
-      return ApiModule.fetchCategories({ endpoint }).then(res => {
+      return ApiModule.fetchCategories().then(res => {
         res.should.be.deep.equal(expectation);
       });
     }));
@@ -48,10 +46,8 @@ describe('api', () => {
    */
   describe('fetchPosts', () => {
     it('should fetch the Product Hunt API and return a promise of posts', sinon.test(function test() {
-      const endpoint = 'http://product-hunt.dev';
-
       this.stub(HttpModule, 'getJSON')
-        .withArgs('http://product-hunt.dev/posts/all')
+        .withArgs('/posts')
         .returns(Promise.resolve({
           key: 'FETCH.SUCCESS',
           body: {
@@ -71,14 +67,13 @@ describe('api', () => {
         ],
       };
 
-      return ApiModule.fetchPosts({ endpoint }).then(res => {
+      return ApiModule.fetchPosts().then(res => {
         res.should.be.deep.equal(expectation);
       });
     }));
 
     it('should fetch the Product Hunt API with query parameters and return a promise of posts', sinon.test(function test() {
       const params = {
-        endpoint: 'http://product-hunt.dev',
         query: {
           per_page: 5,
           older: 0,
@@ -86,7 +81,7 @@ describe('api', () => {
       };
 
       this.stub(HttpModule, 'getJSON')
-        .withArgs(`http://product-hunt.dev/posts/all?${encodeURI('per_page=5&older=0')}`)
+        .withArgs(`/posts?${encodeURI('per_page=5&older=0')}`)
         .returns(Promise.resolve({
           key: 'FETCH.SUCCESS',
           body: {
