@@ -5,6 +5,7 @@
 # Global files
 npm-debug.log
 .DS_Store
+.env
 
 # Files
 /config.json
