@@ -14,7 +14,7 @@ Clone the repository and then run the following command:
 npm install
 ```
 
-Create a token on [Product Hunt API token](https://api.producthunt.com/v1/docs).
+Create a token on [Product Hunt API](https://api.producthunt.com/v1/docs).
 
 ## Run the application
 
