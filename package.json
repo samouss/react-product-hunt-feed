@@ -1,6 +1,6 @@
 {
   "name": "react-product-hunt-feed",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Product Hunt feed build with React",
   "main": "src/index.js",
   "scripts": {
