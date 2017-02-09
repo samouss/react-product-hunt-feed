@@ -4,7 +4,7 @@
 
 Product Hunt feed build with React, Webpack 2, Babel, ESLint, Mocha, Chai, Sinon, Enzyme.
 
-[Live exemple: product-hunt-feed.herokuapp.com](https://product-hunt-feed.herokuapp.com)
+[Live exemple: product-hunt-feed.herokuapp.com](https://product-hunt-feed.herokuapp.com) (it's a free dyno so be patient for the boot time 🙂)
 
 ## Installation
 
